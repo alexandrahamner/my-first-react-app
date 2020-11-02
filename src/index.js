@@ -79,8 +79,24 @@ class Board extends React.Component {
         );
     }
 }
-
+/*
+Placing the history state into the Game component lets us remove the squares state
+from its child Board component. Just like we “lifted state up” from the Square
+component into the Board component, we are now lifting it up from the Board
+into the top-level Game component. This gives the Game component full control
+over the Board’s data, and lets it instruct the Board to render previous turns
+from the history.
+*/
 class Game extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            history: [{
+                squares: Array(9).fill(null),
+            }],
+            xIsNext: true;
+        }
+    }
     render() {
         return (
             <div className="game">
